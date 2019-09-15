@@ -1,6 +1,7 @@
 package com.niklai.demo.test;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -20,8 +21,8 @@ public class SortTest {
      * 循环依次比较前后两个值，大的放在后面
      */
     @Test
+    @DisplayName("冒泡排序")
     public void bubbleSortTest() {
-        System.out.println("冒泡排序");
         for (int i = nums.length - 1; i > 0; --i) {
             for (int j = 0; j < i; ++j) {
                 if (nums[j] > nums[j + 1]) {
@@ -39,8 +40,8 @@ public class SortTest {
      * 将第一个值依次与后面的值进行比较，找到最小的后放在第一个，然后循环
      */
     @Test
+    @DisplayName("选择排序")
     public void selectionSortTest() {
-        System.out.println("选择排序");
         for (int i = 0; i < nums.length; ++i) {
             int tmpIndex = i;
             for (int j = i + 1; j < nums.length; ++j) {
@@ -63,8 +64,8 @@ public class SortTest {
      * 循环依次比较当前值与之前的所有值，发现比之前的某个值小时，将当前值插入到比较值之前
      */
     @Test
+    @DisplayName("插入排序")
     public void insertionSortTest() {
-        System.out.println("插入排序");
         for (int i = 0; i < nums.length; ++i) {
             for (int j = i; j > 0; --j) {
                 if (nums[j] < nums[j - 1]) {
@@ -84,8 +85,8 @@ public class SortTest {
      * 分治法。将数组按照n/2分成两个子数组，子数组分别进行归并排序，将排列好的子数组合并形成最终已排序数组。
      */
     @Test
+    @DisplayName("归并排序")
     public void mergeSortTest() {
-        System.out.println("归并排序");
         afterPrint(splitArray(nums));
     }
 
@@ -94,8 +95,9 @@ public class SortTest {
      * 选择任意一项作为基准项，将所有比它小的值放在左边，比它大的值放在右边，相等的放在任意一边，然后分成两个区，分别对两个区再进行递归快速排序。
      */
     @Test
+    @DisplayName("快速排序")
     public void quickSortTest() {
-        System.out.println("快速排序");
+
     }
 
     private int[] splitArray(int[] arr) {
