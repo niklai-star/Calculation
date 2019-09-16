@@ -5,7 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SortTest {
     private int[] nums;
@@ -98,6 +99,51 @@ public class SortTest {
     @DisplayName("快速排序")
     public void quickSortTest() {
 
+    }
+
+    /**
+     * 计数排序
+     * 找出最大值和最小值，用最大和最小值区间生成一个从小到大的临时键值对空间。
+     * 循环数组项出现的次数，并在对应键的值上加1。然后循环键值对空间，重新组合数组。
+     */
+    @Test
+    @DisplayName("计数排序")
+    public void countingSortTest() {
+        // 找出最大值和最小值
+        int min = nums[0];
+        int max = nums[0];
+        for (int i = 1; i < nums.length; ++i) {
+            if (nums[i] < min) {
+                min = nums[i];
+            }
+
+            if (nums[i] > max) {
+                max = nums[i];
+            }
+        }
+
+        // 生成键值对空间
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = min; i <= max; ++i) {
+            map.put(i, 0);
+        }
+
+        // 累积数组项出现的次数
+        for (int i = 0; i < nums.length; ++i) {
+            map.put(nums[i], map.get(nums[i]) + 1);
+        }
+
+        // 重新输出数组
+        int[] results = new int[nums.length];
+        int index = 0;
+        for (Map.Entry<Integer, Integer> entity : map.entrySet()) {
+            for (int i = 1; i <= entity.getValue(); ++i) {
+                results[index] = entity.getKey();
+                ++index;
+            }
+        }
+
+        afterPrint(results);
     }
 
     private int[] splitArray(int[] arr) {
