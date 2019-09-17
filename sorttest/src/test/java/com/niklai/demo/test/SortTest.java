@@ -4,8 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SortTest {
@@ -139,6 +141,51 @@ public class SortTest {
         for (Map.Entry<Integer, Integer> entity : map.entrySet()) {
             for (int i = 1; i <= entity.getValue(); ++i) {
                 results[index] = entity.getKey();
+                ++index;
+            }
+        }
+
+        afterPrint(results);
+    }
+
+    /**
+     * 桶排序
+     * 将数组项按照一定规则分别放在一组有序的“桶”里，分别对每个不是空的桶里的项进行排序，最后把已排好序的项拼接起来
+     */
+    @Test
+    @DisplayName("桶排序")
+    public void bucketSortTest() {
+        // 假定数组里的每一项都是[0,100)之间的整数
+        Map<Integer, List<Integer>> buckets = new HashMap<>();
+        for (int i = 0; i < 10; ++i) {
+            buckets.put(i, new ArrayList<>());
+        }
+
+        for (int num : nums) {
+            buckets.get(num / 10).add(num);
+        }
+
+        for (Map.Entry<Integer, List<Integer>> bucket : buckets.entrySet()) {
+            if (bucket.getValue().size() != 0) {
+                List<Integer> list = bucket.getValue();
+                // 冒泡排序
+                for (int i = list.size() - 1; i > 0; --i) {
+                    for (int j = 0; j < i; ++j) {
+                        if (list.get(j) > list.get(j + 1)) {
+                            list.set(j + 1, list.get(j) + list.get(j + 1));
+                            list.set(j, list.get(j + 1) - list.get(j));
+                            list.set(j + 1, list.get(j + 1) - list.get(j));
+                        }
+                    }
+                }
+            }
+        }
+
+        int[] results = new int[nums.length];
+        int index = 0;
+        for (Map.Entry<Integer, List<Integer>> bucket : buckets.entrySet()) {
+            for (int num : bucket.getValue()) {
+                results[index] = num;
                 ++index;
             }
         }
