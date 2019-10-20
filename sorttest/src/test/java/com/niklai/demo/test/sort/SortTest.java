@@ -1,4 +1,4 @@
-package com.niklai.demo.test;
+package com.niklai.demo.test.sort;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -191,6 +191,17 @@ public class SortTest {
         }
 
         afterPrint(results);
+    }
+
+    /**
+     * 基数排序
+     * 通用情况：先按照低优先级条件进行收集后排序，然后再按照高优先级条件再次收集后排序，直到最高优先级条件。
+     * 当前例子：先找到最大数，计算位数，确定要收集排序几次，然后按照位数从低到高进行收集排序。
+     */
+    @Test
+    @DisplayName("基数排序")
+    public void radixSortTest(){
+
     }
 
     private int[] splitArray(int[] arr) {
